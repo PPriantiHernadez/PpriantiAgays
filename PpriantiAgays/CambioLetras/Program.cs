@@ -14,41 +14,46 @@ namespace CambioLetras
         {
             Program program = new Program();
 
-            Console.WriteLine("Ingresar un palabra ");
-            string palabra= Console.ReadLine();
+            Console.WriteLine("Ingrese la palabra: ");
+            string palabra = Console.ReadLine();
 
-
-            Console.Write("RESULTADO ES: " + program.Cambiar(palabra));
-
+            Console.WriteLine("La palabra: " + palabra + " = " + program.CambioLetras(palabra));
             Console.ReadKey();
-
         }
 
-
-        public string Cambiar(string palabra)
+        public string CambioLetras(string str)
         {
-            //char[] alfabeto = { 'a', 'b', 'c', 'd', 'f' ,'g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','w','x','y','z'};
+            // Convertir la cadena en un arreglo de caracteres
+            char[] letras = str.ToCharArray();
 
-           //private string cadena;
-            Program program = new Program();
-
-            int str = palabra.Length;
-            Console.WriteLine(str);
-
-            while (str >= 1)
+            // Reemplazar cada letra por la letra que sigue en el alfabeto
+            for (int i = 0; i < letras.Length; i++)
             {
-                palabra = program.Mid(palabra, str + 1);
-                str++;
-                
+                if (letras[i] >= 'a' && letras[i] < 'z')
+                {
+                    letras[i] = (char)(letras[i] + 1);
+                }
+                else if (letras[i] == 'z')
+                {
+                    letras[i] = 'a';
+                }
+                else if (letras[i] >= 'A' && letras[i] < 'Z')
+                {
+                    letras[i] = (char)(letras[i] + 1);
+                }
+                else if (letras[i] == 'Z')
+                {
+                    letras[i] = 'A';
+                }
             }
-            
-            return palabra;
+
+            // Convertir el arreglo de caracteres de nuevo a una cadena
+            string resultado = new string(letras);
+
+            return resultado;
         }
 
 
-        public string Mid(string param, int startIndex)
-        {
-            return param.Substring(startIndex, 1);
-        }
-    }
+    
+}
 }
